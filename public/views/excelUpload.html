@@ -1,0 +1,120 @@
+<div ng-controller="excelUploadCtrl">
+  <div id="snackbar">{{snackHead}}</div>
+  <div class="jumbotron text-center" >
+    <!-- <h1 ng-bind="name"></h1> -->
+    <div>Upload CSV to get the data</div>
+    <div id="excel" >
+      <div class="row">
+        <div class="col-lg-12 upload text-center">
+          <form name="csv" role="form" style="padding-top:10px;">
+            <div class="form-group">
+              <div class="col-lg-4">Upload CSV</div>
+              <div class="col-lg-4">
+                <input id="fileUpload" type="file" name="csvFile" required="required" class="fileinput-new"/>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="padding: 55px 0px 25px 0px;" class="text-center">
+          <button id="upload" ng-click="Upload()" value="Upload" class="btn btn-primary">Upload</button>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span4 offset4 text-center">
+          <button style="margin-top:5px; " ng-click="downloadTemplate()" class="btn btn-link btn-sm">CSV Template</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="manual-add">Here you can manually enter data</div>
+  <div class="col-lg-12">
+    <div class="form-group col-md-3">
+        <label class="control-label">Name</label>
+        <div class="inputBox">
+            <input id="Name" ng-model="name" class="form-control" name="name"  aria-required="true" aria-invalid="false">
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <label class="control-label">Email</label>
+        <div class="inputBox">
+            <input id="Name" ng-model="email" class="form-control" name="email"  aria-required="true" aria-invalid="false">
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <label class="control-label">Age</label>
+        <div class="inputBox">
+            <input id="Name" ng-model="age" class="form-control" name="age"  aria-required="true" aria-invalid="false">
+        </div>
+    </div>
+    <div class="form-group col-md-3 btn-add">
+      <button class="btn btn-primary " ng-click="addUser(name, email, age)">CREATE USER</button>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="form-group btn-add-table float-right " ng-if="!isEdit">
+      <button class="btn btn-primary " ng-click="editTable()">Edit Table</button>
+    </div>
+    <div class="form-group btn-add-table float-right " ng-if="isEdit">
+      <button class="btn btn-primary " ng-click="cancelEdit()">Cancel</button>
+    </div>
+    <div class="form-group btn-add-table float-right " ng-if="isEdit">
+      <button class="btn btn-primary " ng-click="saveTable(users)">Save</button>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-upload">
+  
+    
+    <div class="table-responsive">
+      <table id="myTable" class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="item in users track by $index" ng-if="!isEdit">
+            <td>{{item.name}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.age}}</td>
+            <td>
+               <div class="edit-delete">
+                    <!-- <div class="btn " ng-click="editUser(item.name, item.email, item.age,$index)"><Edit</div> -->
+                    <div class="btn " ng-click="deleteUser(item.name, item.email,item.age, $index)">Delete</div>
+                </div>
+            </td>
+          </tr>
+          <tr ng-repeat="item in users track by $index" ng-if="isEdit">
+            <td>
+              <div class="inputBox">
+                  <input id="Name" ng-model="users[$index].name" class="form-control" name="name"  aria-required="true" aria-invalid="false">
+                  <label id="name-error" class="help-block" style="display: none"></label>
+              </div>
+            </td>
+            <td>
+              <div class="inputBox">
+                  <input id="Name" ng-model="users[$index].email" class="form-control" name="name"  aria-required="true" aria-invalid="false">
+                  <label id="name-error" class="help-block" style="display: none"></label>
+              </div>
+            </td>
+            <td>
+              <div class="inputBox">
+                  <input id="Name" ng-model="users[$index].age" class="form-control" name="name"  aria-required="true" aria-invalid="false">
+                  <label id="name-error" class="help-block" style="display: none"></label>
+              </div>
+            </td>
+            <td>
+               <div class="">
+                    <!-- <div class="btn btn-family-goals btn-goals-1" ng-click="saveEditUser(item.name, item.email, item.age,$index)"><i class="fa fa-pencil-square-o goal-btn-padd" aria-hidden="true"></i>Edit</div> -->
+                    <div class="btn btn-family-goals btn-goals-1" ng-click="cancelSave(item.name, item.email, item.age,$index)"><i class="fa fa-pencil-square-o goal-btn-padd" aria-hidden="true"></i>Edit</div>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
