@@ -6,7 +6,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
 // configuration ===========================================
-var port = process.env.PORT || 8080; // set our port
+var port = process.env.PORT || 8088; // set our port
 
 // config files
 // var db = require('./config/db');
@@ -35,7 +35,7 @@ db.connect('mongodb://localhost:27017/Apiria', function(err) {
     process.exit(1)
   } else {
     app.listen(port, function() {
-      console.log('Listening on port 8080...Server started')
+      console.log('Listening on port 8088...Server started')
     })
   }
 })
