@@ -43,7 +43,6 @@ angular.module('excelUploadCtrl', []).controller('excelUploadCtrl', function($sc
     $scope.fetchDataOnLoad();
     $scope.name = 'Vinod Jat';  
     $scope.uploadCSV = function(arr) {
-        $scope.name = 'Manda';
         $scope.users = $scope.CSVToArray(arr, ',');
         /* Post data */
         $scope.post('/saveData',$scope.users);
